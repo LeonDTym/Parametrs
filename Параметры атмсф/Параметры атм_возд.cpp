@@ -4,7 +4,10 @@
 
 using namespace std;
 
-class Air_par {}; //base class
+class Air_par {
+public:
+	 
+}; //base class
 
 class Air_Temperature :public Air_par { //sub_class
 public:
@@ -27,15 +30,16 @@ class Air_Volume :public Air_par {
 public:
 	//air composition
 
-	void Volume(double v_room)
+	void Volume(double h_room, double l_room, double s_room)
 	{ 
-		cin >> V;
-		V = v_room;
-		cout << "2";
+		
+		double V = h_room*l_room*s_room;
+		cout <<"V: "<< V;
 	}
 
 	double GetName()
 	{
+		
 		return V;
 	}
 private:double V;
@@ -94,18 +98,22 @@ private:
 int main()
 {
 	setlocale(0, "");
+	
+	double Temper,h,l,s; 
+
 	Air_Temperature air;
-	double Temper; 
+	cout << "Температура ";
 	cin >> Temper;
 	air.Temperature(Temper);
-	cout << Temper;
+	cout << Temper<<endl;
 
-//	Air_Volume Vo;
-	double V;
-//	Vo.Volume(V);
-	//cout << V;
-	obiom da;
-	da.Volume(2);
+	Air_Volume Vo;
+	cout << "H: "; cin >> h;
+	cout << "L: "; cin >> l;
+	cout << "S: "; cin >> s;
+	Vo.Volume(h,l,s);
+	
+	
 	
 	
 	
