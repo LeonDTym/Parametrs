@@ -6,7 +6,10 @@ using namespace std;
 
 class Air_par {
 public:
-	 
+	virtual double GetName(double a)
+	{
+		return(a);
+	}
 }; //base class
 
 class Air_Temperature :public Air_par { //sub_class
@@ -16,12 +19,11 @@ public:
 	void Temperature(double temperature_in_room)
 	{
 		Temper = temperature_in_room;
+		cout << Temper << endl;
+		GetName(Temper);
 	}
 
-	double GetName()
-	{
-		return Temper;
-	}
+	
 private:double Temper;
 };
 
@@ -34,14 +36,11 @@ public:
 	{ 
 		
 		double V = h_room*l_room*s_room;
-		cout <<"V: "<< V;
+		cout << "Объем комнаты V: " << V << endl;
+		GetName(V);
 	}
 
-	double GetName()
-	{
-		
-		return V;
-	}
+	
 private:double V;
 		
 };
@@ -105,8 +104,8 @@ int main()
 	cout << "Температура ";
 	cin >> Temper;
 	air.Temperature(Temper);
-	cout << Temper<<endl;
-
+	//
+	
 	Air_Volume Vo;
 	cout << "H: "; cin >> h;
 	cout << "L: "; cin >> l;
