@@ -4,54 +4,117 @@
 
 using namespace std;
 
+//base class
 class Air_par {
 public:
-	virtual double GetName(double a)
+	virtual void pod()=0;
+	double GetName(double a)
 	{
 		return(a);
 	}
-}; //base class
+};
 
-class Air_Temperature :public Air_par { //sub_class
+//sub_class
+class Air_Temperature :public Air_par { 
 public:
-	//air composition
+	
 
-	void Temperature(double temperature_in_room)
-	{
-		Temper = temperature_in_room;
+	void pod() override
+	{ 
+		cout << "Температура "; cin >> Temper;
 		cout << Temper << endl;
+		cout << "Перевести в Кельвин? " << endl;
+		cout << "0 — нет\ 1 — да" << endl;
+		cin >> x;
+		switch (x)
+		{
+		case 0:
+			break;
+
+		case 1:
+			Temper_K = Temper+273;
+			cout << "Температура в Кельвиин " <<Temper_K<< endl;
+			break;
+		default:
+			std::cout << "default case" << std::endl;
+			break;
+		}
 		GetName(Temper);
 	}
-
+	int get_a() const
+	{
+		return Temper_K;
+	}
 	
-private:double Temper;
+private:double Temper,Temper_K;
+	   int x;
 };
 
-
+//sub_class
 class Air_Volume :public Air_par {
 public:
-	//air composition
-
-	void Volume(double h_room, double l_room, double s_room)
+	double V;
+	
+	 void pod() override
 	{ 
-		
-		double V = h_room*l_room*s_room;
+		//double V;
+		cout << "H: "; cin >> h;
+		cout << "L: "; cin >> l;
+		cout << "S: "; cin >> s;
+		V = h*l*s;
 		cout << "Объем комнаты V: " << V << endl;
 		GetName(V);
-	}
-
-	
-private:double V;
 		
+	}
+int get_a() const
+		{
+			return V;
+		}
+
+private:double h,l,s;
 };
 
-class obiom: public Air_Volume{};
+//sub_class Volume
+class Air_Mass :public Air_Volume {
+public:
+	
+		
+	void mass(const Air_Volume& V)  
+	{
+		v = V.get_a();
+		m = v * 1.29;
+		cout << "Масса воздуха в комнате m: " << m << endl;
+		GetName(m);	
+	}
 
+private:double m,v;
+};
 
+//sub_class Temperature
+class Air_Pressure :public Air_Temperature {
+public:
+	
+	void pressure(const Air_Temperature& Temper_K, const Air_Volume& V)
+	{
+		t = Temper_K.get_a();
+		v= V.get_a();
+		p = 29*8.314*t/v;
+		cout << "Давление воздуха в комнате P: " << p << endl;
+		GetName(p);
+	}
 
+private:double v,t,p;
+};
 
-
-
+class Calculation
+{
+public:
+	void pod(Air_par* calc)
+	{
+		calc->pod();
+	}
+	
+};
 
 
 /*	void SetLastName(string student_last_name)
@@ -94,28 +157,20 @@ private:
 	string last_name;
 };
 */
+
 int main()
 {
 	setlocale(0, "");
-	
-	double Temper,h,l,s; 
 
+	Calculation calculation;
 	Air_Temperature air;
-	cout << "Температура ";
-	cin >> Temper;
-	air.Temperature(Temper);
-	//
-	
 	Air_Volume Vo;
-	cout << "H: "; cin >> h;
-	cout << "L: "; cin >> l;
-	cout << "S: "; cin >> s;
-	Vo.Volume(h,l,s);
-	
-	
-	
-	
-	
+	Air_Mass Ma;
+	Air_Pressure Pre;
+	calculation.pod(&air);
+	calculation.pod(&Vo);
+	Ma.mass(Vo);
+	Pre.pressure(air, Vo);
 	/*string last_name;
 	int n, a;
 	int scores[5];
