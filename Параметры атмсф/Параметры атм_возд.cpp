@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <fstream>
+#include <windows.h>
 
 using namespace std;
 
@@ -8,19 +10,18 @@ using namespace std;
 class Air_par {
 public:
 	virtual void pod()=0;
-	double GetName(double a)
-	{
-		return(a);
-	}
+	
 };
 
 //sub_class
 class Air_Temperature :public Air_par { 
 public:
 	
-
+	
 	void pod() override
 	{ 
+		ofstream fout("cppstudio.txt");
+		
 		cout << "Температура "; cin >> Temper;
 		cout << Temper << endl;
 		cout << "Перевести в Кельвин? " << endl;
@@ -34,13 +35,17 @@ public:
 		case 1:
 			Temper_K = Temper+273;
 			cout << "Температура в Кельвиин " <<Temper_K<< endl;
+
 			break;
 		default:
 			std::cout << "default case" << std::endl;
 			break;
 		}
-		GetName(Temper);
+		fout << "Температура " <<Temper<<endl ;
+		fout << "Температура Кельвин " << Temper_K<<endl;
+		fout.close();
 	}
+	
 	int get_a() const
 	{
 		return Temper_K;
@@ -54,22 +59,54 @@ private:double Temper,Temper_K;
 class Air_Volume :public Air_par {
 public:
 	double V;
-	
+
+	/*friend ostream& operator<<(ostream& o, Air_Volume& x) {
+		cout << "a= " << x.h << ", b= " << x.l << ", c= " << x.s;
+ return o;
+	}*/
+
 	 void pod() override
 	{ 
-		//double V;
-		cout << "H: "; cin >> h;
+		/* ofstream ofs("text.txt", ios::binary);
+		 ofs.write(reinterpret_cast<char*>(&V), sizeof(V));
+		 ofs.close();
+		 
+
+		 if (!ifs) { cerr << "File not found"; return 1; }*/
+		ofstream fout("cppstudio.txt",ios::app); // создаём объект класса ofstream для записи и связываем его с файлом cppstudio.txt
+		cout << "Введите стороны комнаты" << endl;
+		cout << "H: "; cin >> h; 
 		cout << "L: "; cin >> l;
 		cout << "S: "; cin >> s;
 		V = h*l*s;
-		cout << "Объем комнаты V: " << V << endl;
-		GetName(V);
-		
+		cout << "Объем комнаты V: " << V << endl; 
+		fout << "Высота комнаты H:" << h << endl;
+		fout << "Длина комнаты L:" << l << endl;
+		fout << "Ширина комнаты S:" << s << endl;
+		fout << "Объем:"<<V<<endl;
+		fout.close(); // закрываем файл
+		/*ifstream ifs("text.txt", ios::binary);
+		ifs.read(reinterpret_cast<char*>(&V), sizeof(V));
+		 ifs.close();
+		 cout << "Vo1: " << V << "\n";*/
+	
+	/*	char buff[50]; // буфер промежуточного хранения считываемого из файла текста
+		ifstream fin("cppstudio.txt"); // открыли файл для чтения
+
+		fin >> buff; // считали первое слово из файла
+		cout << buff << endl; // напечатали это слово
+
+		fin.getline(buff, 50); // считали строку из файла
+		fin.close(); // закрываем файл
+		cout << buff << endl; // напечатали эту строку
+*/
 	}
-int get_a() const
+	int get_a() const
 		{
 			return V;
-		}
+		} 
+	
+			
 
 private:double h,l,s;
 };
@@ -81,10 +118,12 @@ public:
 		
 	void mass(const Air_Volume& V)  
 	{
+		ofstream fout("cppstudio.txt", ios::app);
 		v = V.get_a();
 		m = v * 1.29;
 		cout << "Масса воздуха в комнате m: " << m << endl;
-		GetName(m);	
+		fout << "Масса воздуха в комнате m:" << m << endl;
+		fout.close(); // закрываем файл	
 	}
 
 private:double m,v;
@@ -96,11 +135,13 @@ public:
 	
 	void pressure(const Air_Temperature& Temper_K, const Air_Volume& V)
 	{
+		ofstream fout("cppstudio.txt", ios::app);
 		t = Temper_K.get_a();
 		v= V.get_a();
 		p = 29*8.314*t/v;
 		cout << "Давление воздуха в комнате P: " << p << endl;
-		GetName(p);
+		fout << "Давление воздуха в комнате P:" << p << endl;
+		fout.close(); // закрываем файл
 	}
 
 private:double v,t,p;
@@ -115,6 +156,8 @@ public:
 	}
 	
 };
+
+
 
 
 /*	void SetLastName(string student_last_name)
@@ -161,16 +204,33 @@ private:
 int main()
 {
 	setlocale(0, "");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	
 
 	Calculation calculation;
 	Air_Temperature air;
-	Air_Volume Vo;
+	Air_Volume Vo,Vo1;
 	Air_Mass Ma;
 	Air_Pressure Pre;
+
 	calculation.pod(&air);
+
 	calculation.pod(&Vo);
+	
+	
+	//Vo.pod();
+	
+
 	Ma.mass(Vo);
 	Pre.pressure(air, Vo);
+
+
+	
+	
+
+
+	
 	/*string last_name;
 	int n, a;
 	int scores[5];
