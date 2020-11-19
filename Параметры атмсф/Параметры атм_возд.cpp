@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include <cstdlib>
 #include <fstream>
@@ -22,10 +22,10 @@ public:
 	{ 
 		ofstream fout("cppstudio.txt");
 		
-		cout << "Температура "; cin >> Temper;
+		cout << "РўРµРјРїРµСЂР°С‚СѓСЂР° "; cin >> Temper;
 		cout << Temper << endl;
-		cout << "Перевести в Кельвин? " << endl;
-		cout << "0 — нет\ 1 — да" << endl;
+		cout << "РџРµСЂРµРІРµСЃС‚Рё РІ РљРµР»СЊРІРёРЅ? " << endl;
+		cout << "0 вЂ” РЅРµС‚\ 1 вЂ” РґР°" << endl;
 		cin >> x;
 		switch (x)
 		{
@@ -34,15 +34,15 @@ public:
 
 		case 1:
 			Temper_K = Temper+273;
-			cout << "Температура в Кельвиин " <<Temper_K<< endl;
+			cout << "РўРµРјРїРµСЂР°С‚СѓСЂР° РІ РљРµР»СЊРІРёРёРЅ " <<Temper_K<< endl;
 
 			break;
 		default:
 			std::cout << "default case" << std::endl;
 			break;
 		}
-		fout << "Температура " <<Temper<<endl ;
-		fout << "Температура Кельвин " << Temper_K<<endl;
+		fout << "РўРµРјРїРµСЂР°С‚СѓСЂР° " <<Temper<<endl ;
+		fout << "РўРµРјРїРµСЂР°С‚СѓСЂР° РљРµР»СЊРІРёРЅ " << Temper_K<<endl;
 		fout.close();
 	}
 	
@@ -73,32 +73,32 @@ public:
 		 
 
 		 if (!ifs) { cerr << "File not found"; return 1; }*/
-		ofstream fout("cppstudio.txt",ios::app); // создаём объект класса ofstream для записи и связываем его с файлом cppstudio.txt
-		cout << "Введите стороны комнаты" << endl;
+		ofstream fout("cppstudio.txt",ios::app); // СЃРѕР·РґР°С‘Рј РѕР±СЉРµРєС‚ РєР»Р°СЃСЃР° ofstream РґР»СЏ Р·Р°РїРёСЃРё Рё СЃРІСЏР·С‹РІР°РµРј РµРіРѕ СЃ С„Р°Р№Р»РѕРј cppstudio.txt
+		cout << "Р’РІРµРґРёС‚Рµ СЃС‚РѕСЂРѕРЅС‹ РєРѕРјРЅР°С‚С‹" << endl;
 		cout << "H: "; cin >> h; 
 		cout << "L: "; cin >> l;
 		cout << "S: "; cin >> s;
 		V = h*l*s;
-		cout << "Объем комнаты V: " << V << endl; 
-		fout << "Высота комнаты H:" << h << endl;
-		fout << "Длина комнаты L:" << l << endl;
-		fout << "Ширина комнаты S:" << s << endl;
-		fout << "Объем:"<<V<<endl;
-		fout.close(); // закрываем файл
+		cout << "РћР±СЉРµРј РєРѕРјРЅР°С‚С‹ V: " << V << endl; 
+		fout << "Р’С‹СЃРѕС‚Р° РєРѕРјРЅР°С‚С‹ H:" << h << endl;
+		fout << "Р”Р»РёРЅР° РєРѕРјРЅР°С‚С‹ L:" << l << endl;
+		fout << "РЁРёСЂРёРЅР° РєРѕРјРЅР°С‚С‹ S:" << s << endl;
+		fout << "РћР±СЉРµРј:"<<V<<endl;
+		fout.close(); // Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 		/*ifstream ifs("text.txt", ios::binary);
 		ifs.read(reinterpret_cast<char*>(&V), sizeof(V));
 		 ifs.close();
 		 cout << "Vo1: " << V << "\n";*/
 	
-	/*	char buff[50]; // буфер промежуточного хранения считываемого из файла текста
-		ifstream fin("cppstudio.txt"); // открыли файл для чтения
+	/*	char buff[50]; // Р±СѓС„РµСЂ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРіРѕ С…СЂР°РЅРµРЅРёСЏ СЃС‡РёС‚С‹РІР°РµРјРѕРіРѕ РёР· С„Р°Р№Р»Р° С‚РµРєСЃС‚Р°
+		ifstream fin("cppstudio.txt"); // РѕС‚РєСЂС‹Р»Рё С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ
 
-		fin >> buff; // считали первое слово из файла
-		cout << buff << endl; // напечатали это слово
+		fin >> buff; // СЃС‡РёС‚Р°Р»Рё РїРµСЂРІРѕРµ СЃР»РѕРІРѕ РёР· С„Р°Р№Р»Р°
+		cout << buff << endl; // РЅР°РїРµС‡Р°С‚Р°Р»Рё СЌС‚Рѕ СЃР»РѕРІРѕ
 
-		fin.getline(buff, 50); // считали строку из файла
-		fin.close(); // закрываем файл
-		cout << buff << endl; // напечатали эту строку
+		fin.getline(buff, 50); // СЃС‡РёС‚Р°Р»Рё СЃС‚СЂРѕРєСѓ РёР· С„Р°Р№Р»Р°
+		fin.close(); // Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
+		cout << buff << endl; // РЅР°РїРµС‡Р°С‚Р°Р»Рё СЌС‚Сѓ СЃС‚СЂРѕРєСѓ
 */
 	}
 	int get_a() const
@@ -121,9 +121,9 @@ public:
 		ofstream fout("cppstudio.txt", ios::app);
 		v = V.get_a();
 		m = v * 1.29;
-		cout << "Масса воздуха в комнате m: " << m << endl;
-		fout << "Масса воздуха в комнате m:" << m << endl;
-		fout.close(); // закрываем файл	
+		cout << "РњР°СЃСЃР° РІРѕР·РґСѓС…Р° РІ РєРѕРјРЅР°С‚Рµ m: " << m << endl;
+		fout << "РњР°СЃСЃР° РІРѕР·РґСѓС…Р° РІ РєРѕРјРЅР°С‚Рµ m:" << m << endl;
+		fout.close(); // Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»	
 	}
 
 private:double m,v;
@@ -139,9 +139,9 @@ public:
 		t = Temper_K.get_a();
 		v= V.get_a();
 		p = 29*8.314*t/v;
-		cout << "Давление воздуха в комнате P: " << p << endl;
-		fout << "Давление воздуха в комнате P:" << p << endl;
-		fout.close(); // закрываем файл
+		cout << "Р”Р°РІР»РµРЅРёРµ РІРѕР·РґСѓС…Р° РІ РєРѕРјРЅР°С‚Рµ P: " << p << endl;
+		fout << "Р”Р°РІР»РµРЅРёРµ РІРѕР·РґСѓС…Р° РІ РєРѕРјРЅР°С‚Рµ P:" << p << endl;
+		fout.close(); // Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 	}
 
 private:double v,t,p;
@@ -235,21 +235,21 @@ int main()
 	int n, a;
 	int scores[5];
 	//    float worst = 100, best = 0;
-	cout << "Введите ср бал ";
+	cout << "Р’РІРµРґРёС‚Рµ СЃСЂ Р±Р°Р» ";
 	cin >> a;
-	cout << "Введите кол-во студентов: ";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»-РІРѕ СЃС‚СѓРґРµРЅС‚РѕРІ: ";
 	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		cout << "Имя " << i + 1 << "-го" << " студента: ";
+		cout << "РРјСЏ " << i + 1 << "-РіРѕ" << " СЃС‚СѓРґРµРЅС‚Р°: ";
 		cin >> Temper;
 
-		cout << "Фамилия " << i + 1 << "-го" << " студента: ";
+		cout << "Р¤Р°РјРёР»РёСЏ " << i + 1 << "-РіРѕ" << " СЃС‚СѓРґРµРЅС‚Р°: ";
 		cin >> last_name;
 
 		for (int j = 0; j < 5; j++)
 		{
-			cout << j + 1 << "-ая" << " оценка: ";
+			cout << j + 1 << "-Р°СЏ" << " РѕС†РµРЅРєР°: ";
 			cin >> scores[j];
 		}
 
@@ -257,11 +257,11 @@ int main()
 		 student.SetLastName(last_name);
 		student.SetScores(scores);
 	student.CalcAverageBall();
-		//  cout << "Средний балл студента " << student.GetAverageBall() << endl;
+		//  cout << "РЎСЂРµРґРЅРёР№ Р±Р°Р»Р» СЃС‚СѓРґРµРЅС‚Р° " << student.GetAverageBall() << endl;
 		if (student.GetAverageBall() >= a)
 			//   best = student.GetAverageBall();
-			cout << " Средний балл " << student.GetAverageBall() << "; Фамилия и имя " << name << " " << last_name << ";" << endl;
-		// << "Средний балл" << scores << ";" << endl;
+			cout << " РЎСЂРµРґРЅРёР№ Р±Р°Р»Р» " << student.GetAverageBall() << "; Р¤Р°РјРёР»РёСЏ Рё РёРјСЏ " << name << " " << last_name << ";" << endl;
+		// << "РЎСЂРµРґРЅРёР№ Р±Р°Р»Р»" << scores << ";" << endl;
 		// if (student.GetAverageBall() < worst)
 		  //   worst = student.GetAverageBall();
 	}*/
